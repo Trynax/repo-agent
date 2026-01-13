@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { quartile: string } },
+  { params }: { params: Promise<{ quartile: string }> },
 ) {
   try {
     const user = await getUser();
@@ -17,7 +17,8 @@ export async function GET(
     const repo = searchParams.get("repo");
     const page = parseInt(searchParams.get("page") || "1");
     const pageSize = parseInt(searchParams.get("pageSize") || "20");
-    const quartileIndex = parseInt(params.quartile);
+    const { quartile } = await params;
+    const quartileIndex = parseInt(quartile);
 
     if (!owner || !repo) {
       return NextResponse.json(

@@ -8,7 +8,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <EchoProvider config={{ appId: process.env.NEXT_PUBLIC_ECHO_APP_ID! }}>
+    <EchoProvider config={{ appId: process.env.NEXT_PUBLIC_ECHO_APP_ID || "00000000-0000-4000-8000-000000000000" }}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </EchoProvider>
   );
