@@ -2,9 +2,21 @@
   "name": "github-connector",
   "version": "0.1.0",
   "private": true,
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "protobufjs",
+      "unrs-resolver"
+    ]
+  },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "prisma generate && next build --turbopack",
     "start": "next start",
     "lint": "eslint",
     "prisma:generate": "prisma generate",
@@ -54,7 +66,7 @@
     "motion": "^12.23.24",
     "nanoid": "^5.1.6",
     "neverthrow": "^8.2.0",
-    "next": "15.5.2",
+    "next": "15.5.9",
     "octokit": "^5.0.4",
     "pg": "^8.16.3",
     "react": "19.1.0",

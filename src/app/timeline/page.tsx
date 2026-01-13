@@ -19,7 +19,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 
 const TimelinePage = React.memo(function TimelinePage() {
   const searchParams = useSearchParams();
@@ -730,4 +730,14 @@ const TimelinePage = React.memo(function TimelinePage() {
   );
 });
 
-export default TimelinePage;
+export default function TimelinePageWithSuspense() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    }>
+      <TimelinePage />
+    </Suspense>
+  );
+}

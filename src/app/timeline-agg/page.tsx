@@ -17,7 +17,7 @@ import {
   SkipForward,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 
 interface PrSequenceItem {
   sequenceNumber: number;
@@ -705,4 +705,14 @@ const TimelineAggPage = React.memo(function TimelineAggPage() {
   );
 });
 
-export default TimelineAggPage;
+export default function TimelineAggPageWithSuspense() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    }>
+      <TimelineAggPage />
+    </Suspense>
+  );
+}
